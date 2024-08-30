@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar - Notinhas</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+<body style="margin: 0; padding: 0; background-color: #F5F5F5; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Roboto',sans-serif; font-weight: 400; font-style: normal;">
+
+    <div id="logo-login"><div class="icone-logo"></div><div>Notinhas</div></div>
+    <div class="login-container">
+        <h2 style="margin: 0px; margin-bottom: 20px">Entrar</h2>
+        <form id="login-form">
+            <input class="input-login" type="email" id="login-email" placeholder="E-mail" required>
+            <input class="input-login" type="password" id="login-password" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+
+    <script src="scripts.js"></script>
+    <script>
+    firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                window.location.href = 'app';
+            }
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            firebase.auth().signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    window.location.href = 'app';
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        });
+    </script>
+
+</body>
+</html>
