@@ -43,57 +43,10 @@ h2 {
     width: 260px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     position: fixed;
     top: 0;
     bottom: 0;
     background-color: #f8f9fa;
-}
-
-.sidebar-up {
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-.sidebar-up::-webkit-scrollbar {
-    width: 4px !important;
-}
-
-.sidebar-up::-webkit-scrollbar-thumb {
-    background: #AAA !important;
-}
-
-.sidebar-up::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.1) !important;
-}
-
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    color: #202124;
-}
-
-.sidebar li {
-    padding: 10px;
-    cursor: pointer;
-    margin: 0 20px;
-    border-radius: 3px;
-}
-
-.sidebar li:hover {
-    background-color: #e8edef;
-}
-
-.sidebar .user {
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    border-top: 1px solid #dadce0;
 }
 
 #logo {
@@ -114,6 +67,52 @@ h2 {
 #logo:hover {
    background-color: #2D6AFF;
    color: #fff;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #202124;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sidebar ul::-webkit-scrollbar {
+    width: 4px !important;
+    border-radius: 360px;
+}
+
+.sidebar ul::-webkit-scrollbar-thumb {
+    background: #bfc1c5 !important;
+    border-radius: 360px;
+}
+
+.sidebar ul::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1) !important;
+    border-radius: 360px;
+}
+
+.sidebar li {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.sidebar li:hover {
+    background-color: #e8edef;
+}
+
+.user {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-top: 1px solid #dadce0;
+    background-color: #f8f9fa;
+    margin-top: auto;
 }
 
 .selected-note {
