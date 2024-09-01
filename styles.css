@@ -15,6 +15,7 @@ a {
 
 h2 {
     margin-top: 0px;
+    color: #202124;
 }
 
 ::-webkit-scrollbar {
@@ -292,13 +293,6 @@ h2 {
     width: 300px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: #FFF;
-    border-radius: 4px;
-    border: 1px solid #DDD;
-    box-shadow: 0px 10px 25px -4px rgba(0,0,0,0.15);
 }
 
 .login-container button {
@@ -314,7 +308,8 @@ h2 {
     padding: 10px 15px;
     border-radius: 4px;
     color: #fff;
-    min-height: 30px;
+    min-height: 42px;
+    letter-spacing: 1px;
 }
 
 #login-form {
@@ -340,14 +335,22 @@ h2 {
     border-color: #2D6AFF;
 }
 
+.input-login::placeholder {
+    color: #babcbe;
+}
+
+.input-login:focus::placeholder {
+    color: transparent;
+}
+
 #logo-login {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 25px;
     font-weight: 700;
-    font-size: 26px;
+    font-size: 22px;
     gap: 3px;
     color: #2D6AFF;
     line-height: 0;
