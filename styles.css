@@ -47,7 +47,7 @@ h2 {
     position: fixed;
     top: 0;
     bottom: 0;
-    background-color: #f8f9fa;
+    border-right: 1px solid #E0E6ED;
 }
 
 #logo {
@@ -101,7 +101,7 @@ h2 {
 }
 
 .sidebar li:hover {
-    background-color: #e8edef;
+    background-color: #F9FAFC;
 }
 
 .user {
@@ -112,8 +112,8 @@ h2 {
     align-items: center;
     justify-content: space-between;
     padding: 10px;
-    border-top: 1px solid #dadce0;
-    background-color: #f8f9fa;
+    border-top: 1px solid #E0E6ED;
+    background-color: #F9FAFC;
     margin-top: auto;
 }
 
