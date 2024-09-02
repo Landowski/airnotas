@@ -75,7 +75,7 @@ h2 {
     padding: 0;
     margin: 0;
     font-size: 14px;
-    color: #202124;
+    color: #1F2D3D;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -101,7 +101,13 @@ h2 {
 }
 
 .sidebar li:hover {
-    background-color: #F9FAFC;
+    background-color: #EFF2F7;
+}
+
+.selected-note {
+    font-weight: bold;
+    background-color: #EFF2F7;
+    color: #202124;
 }
 
 .user {
@@ -115,12 +121,6 @@ h2 {
     border-top: 1px solid #E0E6ED;
     background-color: #F9FAFC;
     margin-top: auto;
-}
-
-.selected-note {
-    font-weight: bold;
-    background-color: #e8edef;
-    color: #202124;
 }
 
 .la-power-off:hover {
