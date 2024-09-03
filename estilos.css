@@ -11,7 +11,18 @@ body {
     padding: 0;
     display: flex;
     height: 100vh;
+}
+
+body.light-mode {
+    background-color: #fff;
     color: #111;
+    color-scheme: light;
+}
+
+body.dark-mode {
+    background-color: #181818;
+    color: #DBDBDB;
+    color-scheme: dark;
 }
 
 a {
@@ -21,6 +32,11 @@ a {
 h2 {
     margin-top: 0px;
     color: #111;
+}
+
+h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .container {
@@ -69,7 +85,7 @@ h2 {
     padding: 0;
     margin: 0;
     font-size: 14px;
-    color: #1F2D3D;
+    color: #111;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -100,6 +116,16 @@ h2 {
     border: 1px solid transparent;
 }
 
+.sidebar li.light-mode {
+    background-color: #fff;
+    color: #111;
+}
+
+.sidebar li.dark-mode {
+    background-color: #181818;
+    color: #DBDBDB;
+}
+
 .sidebar li:hover {
     padding-left: 10px;
     border-color: #d5d5d5;
@@ -107,11 +133,20 @@ h2 {
 
 .selected-note {
     font-weight: bold;
-    background-color: #f5f5f5;
-    color: #111;
     border-radius: 4px;
     padding-left: 10px !important;
     border-left: 4px solid #2D6AFF !important;
+    background-color: #f5f5f5;
+    color: #111;
+}
+
+.selected-note.light-mode {
+    background-color: #f5f5f5 !important;
+    color: #111;
+}
+
+.selected-note.dark-mode {
+    background-color: #383838 !important;
 }
 
 #user {
@@ -120,11 +155,26 @@ h2 {
     align-items: center;
     justify-content: space-between;
     padding: 6px;
-    border: 1px solid #d5d5d5;
     border-radius: 4px;
-    background-color: #f8f8f8;
     margin-top: auto;
     margin-right: 20px;
+}
+
+#user.light-mode {
+    background-color: #f8f8f8;
+    border: 1px solid #d5d5d5;
+}
+
+#user.dark-mode {
+    background-color: #333;
+    color: #999;
+}
+
+#usuario {
+    font-size: 11px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: default;
 }
 
 .la-power-off:hover {
@@ -151,7 +201,16 @@ h2 {
     font-weight: bold;
     border: 0;
     outline: 0;
+}
+
+#note-details.light-mode input {
     color: #111;
+    background-color: #fff;
+}
+
+#note-details.dark-mode input {
+    background-color: #181818;
+    color: #DBDBDB;
 }
 
 #note-body {
@@ -173,22 +232,65 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #555;
     padding: 5px 7px;
     border: 0;
     cursor: pointer;
     border-radius: 4px;
+}
+
+.note-actions button.light-mode {
+    background-color: #fff;
+    color: #555;
+}
+
+.note-actions button.dark-mode {
+    background-color: transparent;
+    color: #999;
+}
+
+.note-actions button.light-mode:hover {
+    background-color: #ebebeb;
+}
+
+.note-actions button.dark-mode:hover {
+    background-color: #383838;
+}
+
+#dark-mode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 7px;
+    border: 0;
+    cursor: pointer;
+    border-radius: 4px;
+    position: absolute;
+    top: 30px;
+    right: 20px;
+}
+
+#dark-mode.light-mode {
+    color: #555;
     background-color: #fff;
 }
 
-.note-actions button:hover {
+#dark-mode.dark-mode {
+    color: #999;
+    background-color: transparent;
+}
+
+#dark-mode.light-mode:hover {
     background-color: #ebebeb;
+}
+
+#dark-mode.dark-mode:hover {
+    background-color: #383838;
 }
 
 #home {
     display: flex;
     flex-direction: column;
-    font-size: 16px;
+    font-size: 15px;
     color: #111;
 }
 
@@ -197,12 +299,22 @@ h2 {
     flex-direction: row;
     align-items: center;
     border-radius: 4px;
-    padding: 10px 15px;
+    padding: 10px;
     gap: 5px;
+}
+
+.help.light-mode {
     background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
-    border-bottom: 2px solid #e0e0e0;
     color: #333;
+    border: 1px solid #e0e0e0;
+    border-left: 4px solid #e0e0e0;
+}
+
+.help.dark-mode {
+    background-color: #282828;
+    color: #777;
+    border: 1px solid #383838;
+    border-left: 4px solid #383838;
 }
 
 .popup {
@@ -228,6 +340,7 @@ h2 {
     font-family: "Roboto", sans-serif;
     font-size: 15px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    color: #111;
 }
 
 .popup-content button {
