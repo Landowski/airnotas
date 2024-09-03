@@ -128,7 +128,14 @@ h3 {
 
 .sidebar li:hover {
     padding-left: 10px;
+}
+
+.sidebar li.light-mode:hover {
     border-color: #d5d5d5;
+}
+
+.sidebar li.dark-mode:hover {
+    border-color: #555;
 }
 
 .selected-note {
