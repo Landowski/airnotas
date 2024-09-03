@@ -14,38 +14,40 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
-<body>
+<body class="light-mode">
     <div class="container">
+        <button id="dark-mode" class="light-mode" title="Modo noturno/diurno"><i class="las la-adjust" style="font-size: 20px;"></i></button>
         <div class="sidebar">
             <div id="logo"><i class="las la-sticky-note" style="font-size: 24px; transition: none;"></i> Airnotas</div>
                 <div id="loading-message" style="display: flex; align-items: center; justify-content: center; align-self: center;"><img src="clock.svg" width="24" height="24"></div>
                 <ul id="notes-list"></ul>
-            <div id="user">
-                <span id="usuario" style="font-size: 11px; color: #5f6368; overflow: hidden; text-overflow: ellipsis; cursor: default"></span>
+            <div id="user" class="light-mode">
+                <span id="usuario"></span>
                 <div id="logout" style="cursor:  pointer; width: 16px; height: 16px;"><i class="las la-power-off" style="font-size: 18px;"></i></div>
             </div>
         </div>
         <div class="content">
             <div id="note-details" class="hidden">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-                    <input type="text" id="note-title" placeholder="Título">
+                    <input type="text" id="note-title" placeholder="Título" class="light-mode">
                     <div class="note-actions">
-                        <button id="delete-note"><i class="las la-trash-alt" style="font-size: 20px;"></i></button>
-                        <button id="toggle-pin"><i class="las la-thumbtack" style="font-size: 20px;"></i></button>
+                        <button id="toggle-pin" class="light-mode" title="Fixar"><i class="las la-thumbtack" style="font-size: 20px;"></i></button>
+                        <button id="delete-note" class="light-mode" title="Excluir"><i class="las la-trash-alt" style="font-size: 20px;"></i></button>
+                        <button id="ajuda" class="light-mode" title="Ajuda"><i class="las la-question-circle" style="font-size: 20px;"></i></button>
+                        
                     </div>
                 </div>
                 <div id="note-body" contenteditable="true" placeholder="Digite sua mensagem"></div>
             </div>
             <div id="home">
-                <div style="display: flex; flex-direction: column; gap: 14px;">
-                    <h2><i class="lar la-hand-peace" style="font-size: 32px;"></i> Olá, você tem <span id="numero-notas"></span> notas.</h2>
-                    <h3 style="margin-bottom: 10px;">Atalhos:</h3>
-                    <div class="help"><b>Negrito</b> = Control + B</div>
-                    <div class="help"><i>Itálico</i> = Control + I</div>
-                    <div class="help"><u>Sublinhado</u> = Control + U</div>
-                    <div class="help"><h3 style="margin: 0">Título</h3> = Control + H</div>
-                    <div class="help">● Lista = Control + L</div>
-                    <div class="help"><span style="color: #2D6AFF">Cor</span> = Control + P</div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <h3 id="h3">Atalhos:</h3>
+                    <div class="help light-mode"><b>Negrito</b> = Control + B</div>
+                    <div class="help light-mode"><i>Itálico</i> = Control + I</div>
+                    <div class="help light-mode"><u>Sublinhado</u> = Control + U</div>
+                    <div class="help light-mode"><h3 style="margin: 0">Título</h3> = Control + H</div>
+                    <div class="help light-mode">● Lista = Control + L</div>
+                    <div class="help light-mode"><span style="color: #2D6AFF">Cor</span> = Control + P</div>
                 </div>
             </div>
     </div>
