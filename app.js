@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const home = document.getElementById("home");
             const colorPicker = document.getElementById("color-picker");
             const numeroNotas = document.getElementById("numero-notas");
+            const toggleDark = document.getElementById("dark-mode");
 
             const db = firebase.firestore();
             let notes = [];
@@ -50,12 +51,76 @@ document.addEventListener("DOMContentLoaded", function() {
 
             getNumberOfNotes();
 
+            toggleDark.addEventListener("click", () => {
+                const items = document.querySelectorAll('.sidebar ul li');
+                const usuario = document.getElementById('user');
+                const botoes = document.querySelectorAll('.note-actions button');
+                const help = document.querySelectorAll('.help');
+                const botaoDark = document.getElementById('dark-mode');
+                const h3 = document.getElementById('h3')
+                if (document.body.classList.contains('light-mode')) {
+                    document.body.classList.remove('light-mode');
+                    document.body.classList.add('dark-mode');
+                    noteDetails.classList.remove('light-mode');
+                    noteDetails.classList.add('dark-mode');
+                    usuario.classList.remove('light-mode');
+                    usuario.classList.add('dark-mode');
+                    botaoDark.classList.remove('light-mode');
+                    botaoDark.classList.add('dark-mode');
+                    h3.style.color="#DBDBDB"
+                    items.forEach(item => {
+                        item.classList.remove('light-mode');
+                        item.classList.add('dark-mode');
+                    });
+                    botoes.forEach(item => {
+                        item.classList.remove('light-mode');
+                        item.classList.add('dark-mode');
+                    });
+                    help.forEach(item => {
+                        item.classList.remove('light-mode');
+                        item.classList.add('dark-mode');
+                    });
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    document.body.classList.add('light-mode');
+                    noteDetails.classList.remove('dark-mode');
+                    noteDetails.classList.add('light-mode');
+                    usuario.classList.remove('dark-mode');
+                    usuario.classList.add('light-mode');
+                    botaoDark.classList.remove('dark-mode');
+                    botaoDark.classList.add('light-mode');
+                    h3.style.color="#111"
+                    items.forEach(item => {
+                        item.classList.remove('dark-mode');
+                        item.classList.add('light-mode');
+                    });
+                    botoes.forEach(item => {
+                        item.classList.remove('dark-mode');
+                        item.classList.add('light-mode');
+                    });
+                    help.forEach(item => {
+                        item.classList.remove('dark-mode');
+                        item.classList.add('light-mode');
+                    });
+                }
+            });
+
             function renderNotesList() {
                 notesList.innerHTML = "";
                 const pinnedNotes = notes.filter(note => note.pinned).sort((a, b) => (a.title || "").localeCompare(b.title || ""));
                 const unpinnedNotes = notes.filter(note => !note.pinned).sort((a, b) => (a.title || "").localeCompare(b.title || ""));
                 [...pinnedNotes, ...unpinnedNotes].forEach(note => {
                     const li = document.createElement("li");
+                    const items = document.querySelectorAll('.sidebar ul li');
+                    if (document.body.classList.contains('light-mode')) {
+                        items.forEach(item => {
+                            item.classList.add('light-mode');
+                        });
+                    } else {
+                        items.forEach(item => {
+                            item.classList.add('dark-mode');
+                        });
+                    }
                     li.innerHTML = (note.pinned ? "<i class='las la-thumbtack' style='font-size: 20px;'></i>" : "") + (note.title || "Nova página");
                     li.dataset.id = note.id;
                     li.addEventListener("click", () => selectNote(note.id));
