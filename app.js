@@ -106,30 +106,42 @@ document.addEventListener("DOMContentLoaded", function() {
             });
 
             function renderNotesList() {
+                // Limpa a lista existente
                 notesList.innerHTML = "";
+            
+                // Filtra e ordena as notas
                 const pinnedNotes = notes.filter(note => note.pinned).sort((a, b) => (a.title || "").localeCompare(b.title || ""));
                 const unpinnedNotes = notes.filter(note => !note.pinned).sort((a, b) => (a.title || "").localeCompare(b.title || ""));
+            
+                // Adiciona todas as notas à lista
                 [...pinnedNotes, ...unpinnedNotes].forEach(note => {
                     const li = document.createElement("li");
-                    const items = document.querySelectorAll('.sidebar ul li');
-                    if (document.body.classList.contains('light-mode')) {
-                        items.forEach(item => {
-                            item.classList.add('light-mode');
-                        });
-                    } else {
-                        items.forEach(item => {
-                            item.classList.add('dark-mode');
-                        });
-                    }
                     li.innerHTML = (note.pinned ? "<i class='las la-thumbtack' style='font-size: 20px;'></i>" : "") + (note.title || "Nova página");
                     li.dataset.id = note.id;
                     li.addEventListener("click", () => selectNote(note.id));
+            
                     if (note.id === currentNoteId) {
                         li.classList.add("selected-note");
                     }
+                    
                     notesList.appendChild(li);
                 });
+            
+                // Seleciona todos os itens da lista atualizada
+                const items = document.querySelectorAll('.sidebar ul li');
+        
+                // Adiciona as classes conforme o modo
+                if (document.body.classList.contains('light-mode')) {
+                    items.forEach(item => {
+                        item.classList.add('light-mode');
+                    });
+                } else {
+                    items.forEach(item => {
+                        item.classList.add('dark-mode');
+                    });
+                }
             }
+
 
             function selectNote(id) {
                 currentNoteId = id;
