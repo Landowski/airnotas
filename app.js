@@ -41,96 +41,100 @@ document.addEventListener("DOMContentLoaded", function() {
             usuario.innerText = user.email
             userDiv.title = user.email
 
-            function getNumberOfNotes() {
-                db.collection("notes").where("userId", "==", userId).get()
-                    .then(snapshot => {
-                        const numberOfNotes = snapshot.size;
-                        numeroNotas.innerText = numberOfNotes;
-                    })
+            const storedMode = localStorage.getItem('theme');
+            if (storedMode === 'dark-mode') {
+                applyDarkMode();
+            } else {
+                applyLightMode();
             }
 
-            getNumberOfNotes();
-
             toggleDark.addEventListener("click", () => {
+                if (document.body.classList.contains('light-mode')) {
+                    applyDarkMode();
+                    localStorage.setItem('theme', 'dark-mode');
+                } else {
+                    applyLightMode();
+                    localStorage.setItem('theme', 'light-mode');
+                }
+            });
+
+            function applyDarkMode() {
                 const items = document.querySelectorAll('.sidebar ul li');
                 const usuario = document.getElementById('user');
                 const botoes = document.querySelectorAll('.note-actions button');
                 const help = document.querySelectorAll('.help');
                 const botaoDark = document.getElementById('dark-mode');
-                const h3 = document.getElementById('h3')
-                if (document.body.classList.contains('light-mode')) {
-                    document.body.classList.remove('light-mode');
-                    document.body.classList.add('dark-mode');
-                    noteDetails.classList.remove('light-mode');
-                    noteDetails.classList.add('dark-mode');
-                    usuario.classList.remove('light-mode');
-                    usuario.classList.add('dark-mode');
-                    botaoDark.classList.remove('light-mode');
-                    botaoDark.classList.add('dark-mode');
-                    h3.style.color="#DBDBDB"
-                    items.forEach(item => {
-                        item.classList.remove('light-mode');
-                        item.classList.add('dark-mode');
-                    });
-                    botoes.forEach(item => {
-                        item.classList.remove('light-mode');
-                        item.classList.add('dark-mode');
-                    });
-                    help.forEach(item => {
-                        item.classList.remove('light-mode');
-                        item.classList.add('dark-mode');
-                    });
-                } else {
-                    document.body.classList.remove('dark-mode');
-                    document.body.classList.add('light-mode');
-                    noteDetails.classList.remove('dark-mode');
-                    noteDetails.classList.add('light-mode');
-                    usuario.classList.remove('dark-mode');
-                    usuario.classList.add('light-mode');
-                    botaoDark.classList.remove('dark-mode');
-                    botaoDark.classList.add('light-mode');
-                    h3.style.color="#111"
-                    items.forEach(item => {
-                        item.classList.remove('dark-mode');
-                        item.classList.add('light-mode');
-                    });
-                    botoes.forEach(item => {
-                        item.classList.remove('dark-mode');
-                        item.classList.add('light-mode');
-                    });
-                    help.forEach(item => {
-                        item.classList.remove('dark-mode');
-                        item.classList.add('light-mode');
-                    });
-                }
-            });
+                const h3 = document.getElementById('h3');
+                
+                document.body.classList.remove('light-mode');
+                document.body.classList.add('dark-mode');
+                noteDetails.classList.remove('light-mode');
+                noteDetails.classList.add('dark-mode');
+                usuario.classList.remove('light-mode');
+                usuario.classList.add('dark-mode');
+                botaoDark.classList.remove('light-mode');
+                botaoDark.classList.add('dark-mode');
+                h3.style.color = "#DBDBDB";
+                items.forEach(item => {
+                    item.classList.remove('light-mode');
+                    item.classList.add('dark-mode');
+                });
+                botoes.forEach(item => {
+                    item.classList.remove('light-mode');
+                    item.classList.add('dark-mode');
+                });
+                help.forEach(item => {
+                    item.classList.remove('light-mode');
+                    item.classList.add('dark-mode');
+                });
+            }
+
+            function applyLightMode() {
+                const items = document.querySelectorAll('.sidebar ul li');
+                const usuario = document.getElementById('user');
+                const botoes = document.querySelectorAll('.note-actions button');
+                const help = document.querySelectorAll('.help');
+                const botaoDark = document.getElementById('dark-mode');
+                const h3 = document.getElementById('h3');
+                
+                document.body.classList.remove('dark-mode');
+                document.body.classList.add('light-mode');
+                noteDetails.classList.remove('dark-mode');
+                noteDetails.classList.add('light-mode');
+                usuario.classList.remove('dark-mode');
+                usuario.classList.add('light-mode');
+                botaoDark.classList.remove('dark-mode');
+                botaoDark.classList.add('light-mode');
+                h3.style.color = "#111";
+                items.forEach(item => {
+                    item.classList.remove('dark-mode');
+                    item.classList.add('light-mode');
+                });
+                botoes.forEach(item => {
+                    item.classList.remove('dark-mode');
+                    item.classList.add('light-mode');
+                });
+                help.forEach(item => {
+                    item.classList.remove('dark-mode');
+                    item.classList.add('light-mode');
+                });
+            }
 
             function renderNotesList() {
-                // Limpa a lista existente
                 notesList.innerHTML = "";
-            
-                // Filtra e ordena as notas
                 const pinnedNotes = notes.filter(note => note.pinned).sort((a, b) => (a.title || "").localeCompare(b.title || ""));
                 const unpinnedNotes = notes.filter(note => !note.pinned).sort((a, b) => (a.title || "").localeCompare(b.title || ""));
-            
-                // Adiciona todas as notas à lista
                 [...pinnedNotes, ...unpinnedNotes].forEach(note => {
                     const li = document.createElement("li");
                     li.innerHTML = (note.pinned ? "<i class='las la-thumbtack' style='font-size: 20px;'></i>" : "") + (note.title || "Nova página");
                     li.dataset.id = note.id;
                     li.addEventListener("click", () => selectNote(note.id));
-            
                     if (note.id === currentNoteId) {
                         li.classList.add("selected-note");
                     }
-                    
                     notesList.appendChild(li);
                 });
-            
-                // Seleciona todos os itens da lista atualizada
                 const items = document.querySelectorAll('.sidebar ul li');
-        
-                // Adiciona as classes conforme o modo
                 if (document.body.classList.contains('light-mode')) {
                     items.forEach(item => {
                         item.classList.add('light-mode');
@@ -141,7 +145,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     });
                 }
             }
-
 
             function selectNote(id) {
                 currentNoteId = id;
