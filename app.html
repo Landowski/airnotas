@@ -15,10 +15,13 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
 <body class="light-mode">
-    <div class="container">
+    <div class="container" id="container">
         <button id="dark-mode" class="light-mode" title="Modo noturno/diurno"><i class="las la-adjust" style="font-size: 20px;"></i></button>
-        <div class="sidebar">
-            <div id="logo"><i class="las la-sticky-note" style="font-size: 24px; transition: none;"></i> Airnotas</div>
+        <div class="sidebar light-mode">
+            <div style="display: flex; margin-bottom: 15px; margin-right: 20px; justify-content: space-between;">
+                <div class="logo"><i class="las la-sticky-note" style="font-size: 24px; transition: none;"></i> Airnotas</div>
+                <div id="logo"><i class="las la-plus-circle" style="font-size: 26px; transition: none;"></i></div>
+            </div>
                 <div id="loading-message" style="display: flex; align-items: center; justify-content: center; align-self: center;"><img src="clock.svg" width="24" height="24"></div>
                 <ul id="notes-list"></ul>
             <div id="user" class="light-mode">
@@ -53,7 +56,7 @@
         <div class="popup-content">
             <p>Deseja realmente excluir a nota "<span style="font-weight: bold" id="note-to-delete"></span>"?</p>
             <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center;">
-                <button class="confirma" id="confirm-delete"><i class="las la-skull-crossbones" style="font-size: 24px"></i> Sim</button>
+                <button class="confirma" id="confirm-delete"><i class="las la-exclamation-triangle" style="font-size: 24px"></i> Sim</button>
                 <button id="cancel-delete" class="cancela">Não</button>
             </div>
         </div>
@@ -63,7 +66,7 @@
     <script>
         firebase.auth().onAuthStateChanged((user) => {
             if (!user) {
-                window.location.href = '/';
+                window.location.href = 'login';
             }
         });
     </script>

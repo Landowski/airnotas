@@ -3,55 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Airnotas</title>
+    <meta name="description" content="App de notas super simples e prático, com editor de textos. Grátis!">
+    <meta name="keywords" content="notas online, app de notas, editor de texto simples, notas grátis, notas simples">
+    <title>Airnotas - Notas simples</title>
     <link rel="icon" href="favicon.png" sizes="any" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="index.css">
     <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
-<body style="margin: 0; padding: 0; font-family: 'Roboto', sans-serif; font-weight: 400;">
+<body>
+    <div class="container">
+        <header>
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div class="logo"><i class="las la-sticky-note" style="font-size: 32px; transition: none;"></i> Airnotas</div>
+                <a id="entrar" href="login">Entrar</a>
+            </div>
+        </header>
 
-    <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-        <div class="login-container">
-            <div id="logo-login"><div style="display: flex; flex-direction: row; align-items: center;"><i class="las la-sticky-note" style="font-size: 28px;"></i> Airnotas</div><span style="padding: 3px 10px; color: #555;
-            font-size: 17px; font-weight: 400; border-radius: 4px; background-color: #f0f0f0;">login</span></div>
-            <form id="login-form">
-                <input class="input-login" type="email" id="login-email" placeholder="E-mail" required>
-                <input class="input-login" type="password" id="login-password" placeholder="Senha" required>
-                <button type="submit">Entrar</button>
-            </form>
-        </div>
+        <section id="call">
+            <h1>Suas notas, online</h1>
+            <p>Crie, edite e organize suas notinhas em tempo real,<br />
+                com funcionalidades que você realmente usa.</p>
+            <a href="cadastro" class="cta-button">Cadastre-se GRÁTIS!</a>
+        </section>
+
+        <section id="image">
+            <img src="airnotas-notas-online.png" alt="Airnotas notas online" />
+        </section>
+
+        <section id="features">
+                <h2>Funcionalidades que você precisa, <span class="wavy">sem complicação</span></h2>
+                <div class="feature-list">
+                    <div class="feature-item" style="margin-bottom: 30px; margin-left: 60px;">
+                        <i class="las la-keyboard"></i>
+                        <div class="column">
+                            <h3>Menos é mais</h3>
+                            <p>Editor simples e completo. Adicione negrito, itálico, sublinhado, títulos e listas com simples comandos.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item" style="margin-bottom: 30px;">
+                        <i class="las la-thumbtack"></i>
+                        <div class="column">
+                            <h3>Organize suas notas</h3>
+                            <p>Fixe as notas importantes no topo e nunca perca de vista o que é mais relevante.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="las la-moon"></i>
+                        <div class="column">
+                            <h3>Modo escuro para leitura noturna</h3>
+                            <p>Troque para o modo noturno e torne a leitura confortável a qualquer hora do dia.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item" style="margin-right: 60px;">
+                        <i class="las la-save"></i>
+                        <div class="column">
+                            <h3>Sem complicação</h3>
+                            <p>Simples, funcional e salva sua nota automaticamente!</p>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <section id="cadastro">
+            <div class="logo"><i class="las la-sticky-note" style="font-size: 32px; transition: none;"></i> Airnotas</div>
+            <br />
+            <h3>Preencha o formulário de cadastro e comece<br />a organizar suas notas em segundos.</h3>
+            <a href="cadastro" class="cta-button">Cadastre-se Grátis</a>
+        </section>
+
+        <footer>
+                <p style="margin-bottom: 5px;"><b>Airnotas <span id="date"></b></span>. Simples e eficiente.</p>
+                <p><a href="termos">Termos de Uso</a> - <a href="privacidade">Política de Privacidade</a></p>
+        </footer>
     </div>
-
-    <script src="app.js"></script>
     <script>
-    firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                window.location.href = 'app';
-            }
-        });
-
-        document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-            firebase.auth().signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    window.location.href = 'app';
-                })
-                .catch((error) => {
-                    alert(error.message);
-                });
-        });
+            const d = new Date();
+            let year = d.getFullYear();
+            const data = document.getElementById("date")
+            data.textContent = year
     </script>
-
 </body>
 </html>
