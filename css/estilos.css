@@ -1,0 +1,518 @@
+* {
+    box-sizing: border-box;
+    transition: all .2s ease;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+body.light-mode {
+    background-color: #fff;
+    color: #111;
+    color-scheme: light;
+}
+
+body.dark-mode {
+    background-color: #181818;
+    color: #DBDBDB;
+    color-scheme: dark;
+}
+
+a {
+    color: #2D6AFF;
+}
+
+h2 {
+    margin-top: 0px;
+    color: #111;
+}
+
+h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.container {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 25px;
+    bottom: 20px;
+    left: 20px;
+}
+
+.logo {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+    gap: 3px;
+    color: #2D6AFF;
+    cursor: pointer;
+}
+
+#logo {
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #2D6AFF;
+}
+
+#notes-list {
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    color: #111;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.sidebar ul:hover {
+    overflow-y: auto !important;
+}
+
+.sidebar.light-mode ul::-webkit-scrollbar {
+    width: 6px !important;
+    border-radius: 360px;
+}
+
+.sidebar.light-mode ul::-webkit-scrollbar-thumb {
+    background: #ccc !important;
+    border-radius: 360px;
+}
+
+.sidebar.light-mode ul::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.08) !important;
+    border-radius: 360px;
+}
+
+.sidebar.dark-mode ul::-webkit-scrollbar {
+    width: 6px !important;
+    border-radius: 360px;
+}
+
+.sidebar.dark-mode ul::-webkit-scrollbar-thumb {
+    background: #444 !important;
+    border-radius: 360px;
+}
+
+.sidebar.dark-mode ul::-webkit-scrollbar-track {
+    background: #222 !important;
+    border-radius: 360px;
+}
+
+.sidebar li {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 0;
+    margin-right: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid transparent;
+}
+
+.sidebar li.light-mode {
+    background-color: #fff;
+    color: #111;
+}
+
+.sidebar li.dark-mode {
+    background-color: #181818;
+    color: #DBDBDB;
+}
+
+.sidebar li:hover {
+    padding-left: 10px;
+}
+
+.sidebar li.light-mode:hover {
+    border-color: #d5d5d5;
+}
+
+.sidebar li.dark-mode:hover {
+    border-color: #555;
+}
+
+.selected-note {
+    font-weight: bold;
+    border-radius: 4px;
+    padding-left: 10px !important;
+    border-left: 4px solid #2D6AFF !important;
+    background-color: #f5f5f5;
+    color: #111;
+}
+
+.selected-note.light-mode {
+    background-color: #f5f5f5 !important;
+    color: #111;
+}
+
+.selected-note.dark-mode {
+    background-color: #383838 !important;
+}
+
+#user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px;
+    border-radius: 4px;
+    margin-top: auto;
+    margin-right: 20px;
+}
+
+#user.light-mode {
+    background-color: #f8f8f8;
+    border: 1px solid #d5d5d5;
+}
+
+#user.dark-mode {
+    background-color: #333;
+    color: #999;
+}
+
+#usuario {
+    font-size: 11px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: default;
+}
+
+.la-power-off:hover {
+    color: red;
+}
+
+.content {
+    width: 860px;
+    padding: 30px;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#note-details {
+    padding-bottom: 25px;
+}
+
+#note-details input {
+    width: 100%;
+    font-size: 26px;
+    font-weight: bold;
+    border: 0;
+    outline: 0;
+}
+
+#note-details.light-mode input {
+    color: #111;
+    background-color: #fff;
+}
+
+#note-details.dark-mode input {
+    background-color: #181818;
+    color: #DBDBDB;
+}
+
+#note-body {
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 0;
+    outline: 0;
+    line-height: 1.4;
+}
+
+.note-actions {
+    display: flex;
+    justify-content: flex-end;
+    height: fit-content;
+}
+
+.note-actions button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 7px;
+    border: 0;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.note-actions button.light-mode {
+    background-color: #fff;
+    color: #555;
+}
+
+.note-actions button.dark-mode {
+    background-color: transparent;
+    color: #999;
+}
+
+.note-actions button.light-mode:hover {
+    background-color: #ebebeb;
+}
+
+.note-actions button.dark-mode:hover {
+    background-color: #383838;
+}
+
+#dark-mode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 7px;
+    border: 0;
+    cursor: pointer;
+    border-radius: 4px;
+    position: absolute;
+    top: 30px;
+    right: 20px;
+}
+
+#dark-mode.light-mode {
+    color: #555;
+    background-color: #fff;
+}
+
+#dark-mode.dark-mode {
+    color: #999;
+    background-color: transparent;
+}
+
+#dark-mode.light-mode:hover {
+    background-color: #ebebeb;
+}
+
+#dark-mode.dark-mode:hover {
+    background-color: #383838;
+}
+
+#home {
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    color: #111;
+}
+
+.help {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 4px;
+    padding: 10px;
+    gap: 5px;
+}
+
+.help.light-mode {
+    background-color: #f9f9f9;
+    color: #333;
+    border: 1px solid #e0e0e0;
+    border-left: 4px solid #e0e0e0;
+}
+
+.help.dark-mode {
+    background-color: #282828;
+    color: #777;
+    border: 1px solid #383838;
+    border-left: 4px solid #383838;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    color: #111;
+}
+
+.popup-content button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 20px;
+    color: #555;
+    background-color: #fff;
+}
+
+.popup-content .confirma {
+    background-color: #F44336;
+    color: #fff;
+}
+
+.popup-content .cancela:hover {
+    background-color: #F0F0F0;
+}
+
+.popup-content .confirma:hover {
+    background-color: #d1392e;
+}
+
+.popup.hidden {
+    display: none;
+}
+
+.popup-content .inserir {
+    background-color: #2D6AFF;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.popup:not(.hidden) {
+    visibility: visible;
+}
+  
+[contenteditable=true]:empty:before {
+    content: attr(placeholder);
+    pointer-events: none;
+    color: #D5D5D5;
+    display: block; /* For Firefox */
+}
+
+.login-container {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    cursor: pointer;
+    background-color: #2D6AFF;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    color: #fff;
+    min-height: 42px;
+    letter-spacing: 1px;
+    height: 42px;
+}
+
+.login-container button:hover {
+    background-color: #285bdd;
+}
+
+#login-form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-login {
+    width: 100%;
+    height: 42px;
+    border-radius: 4px;
+    border: 1px solid #D5D5D5;
+    padding: 5px 10px;
+    outline: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+}
+
+.input-login:hover {
+    border-color: #2D6AFF;
+}
+
+.input-login::placeholder {
+    color: #bbb;
+}
+
+.input-login:focus::placeholder {
+    color: transparent;
+}
+
+#logo-login {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 22px;
+    gap: 3px;
+    color: #2D6AFF;
+    cursor: default;
+}
+
+.pass-group {
+    position: relative;
+}
+
+.toggle {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    position: absolute;
+    z-index: 9999;
+    top: 10px;
+    right: 10px;
+    color: #CCC;
+    font-size: 24px;
+}
+
+.toggle:hover {
+    color: #000;
+}
+
+/* suppress IE >= 10 native functionality that can show password */
+input[type="password"]::-ms-reveal {
+    display: none;
+}

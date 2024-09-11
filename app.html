@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airnotas</title>
-    <link rel="icon" href="favicon.png" sizes="any" type="image/png">
+    <link rel="icon" href="imagens/favicon.png" sizes="any" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="css/estilos.css">
     <link rel= "stylesheet" href= "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" >
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
@@ -22,7 +22,7 @@
                 <div class="logo"><i class="las la-sticky-note" style="font-size: 24px; transition: none;"></i> Airnotas</div>
                 <div id="logo"><i class="las la-plus-circle" style="font-size: 26px; transition: none;"></i></div>
             </div>
-                <div id="loading-message" style="display: flex; align-items: center; justify-content: center; align-self: center;"><img src="clock.svg" width="24" height="24"></div>
+                <div id="loading-message" style="display: flex; align-items: center; justify-content: center; align-self: center;"><img src="imagens/clock.svg" width="24" height="24"></div>
                 <ul id="notes-list"></ul>
             <div id="user" class="light-mode">
                 <span id="usuario"></span>
@@ -62,7 +62,7 @@
         </div>
     </div>
     <input type="color" id="color-picker" class="hidden">
-    <script src="app.js"></script>
+    <script src="js/app.js"></script>
     <script>
         firebase.auth().onAuthStateChanged((user) => {
             if (!user) {
