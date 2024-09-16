@@ -16,8 +16,9 @@
 </head>
 <body class="light-mode">
     <div class="container" id="container">
+        <button id="menu" class="light-mode"><i class="las la-bars" style="font-size: 20px;"></i></button>
         <button id="dark-mode" class="light-mode" title="Modo noturno/diurno"><i class="las la-adjust" style="font-size: 20px;"></i></button>
-        <div class="sidebar light-mode">
+        <div id="sidebar" class="light-mode">
             <div style="display: flex; margin-bottom: 15px; margin-right: 20px; justify-content: space-between;">
                 <div class="logo"><i class="las la-sticky-note" style="font-size: 24px; transition: none;"></i> Airnotas</div>
                 <div id="logo"><i class="las la-plus-circle" style="font-size: 26px; transition: none;"></i></div>
@@ -31,7 +32,7 @@
         </div>
         <div class="content">
             <div id="note-details" class="hidden">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <div class="title">
                     <input type="text" id="note-title" placeholder="Título" class="light-mode">
                     <div class="note-actions">
                         <button id="toggle-pin" class="light-mode" title="Fixar"><i class="las la-thumbtack" style="font-size: 20px;"></i></button>

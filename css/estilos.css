@@ -45,7 +45,7 @@ h3 {
     height: 100%;
 }
 
-.sidebar {
+#sidebar {
     width: 220px;
     display: flex;
     flex-direction: column;
@@ -53,6 +53,12 @@ h3 {
     top: 25px;
     bottom: 20px;
     left: 20px;
+    transition: all 300ms linear;
+}
+
+#sidebar.active {
+    display: flex;
+    left: 0px;
 }
 
 .logo {
@@ -80,7 +86,7 @@ h3 {
     margin-bottom: 20px;
 }
 
-.sidebar ul {
+#sidebar ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -90,41 +96,41 @@ h3 {
     overflow-x: hidden;
 }
 
-.sidebar ul:hover {
+#sidebar ul:hover {
     overflow-y: auto !important;
 }
 
-.sidebar.light-mode ul::-webkit-scrollbar {
+#sidebar.light-mode ul::-webkit-scrollbar {
     width: 6px !important;
     border-radius: 360px;
 }
 
-.sidebar.light-mode ul::-webkit-scrollbar-thumb {
+#sidebar.light-mode ul::-webkit-scrollbar-thumb {
     background: #ccc !important;
     border-radius: 360px;
 }
 
-.sidebar.light-mode ul::-webkit-scrollbar-track {
+#sidebar.light-mode ul::-webkit-scrollbar-track {
     background: rgba(0,0,0,0.08) !important;
     border-radius: 360px;
 }
 
-.sidebar.dark-mode ul::-webkit-scrollbar {
+#sidebar.dark-mode ul::-webkit-scrollbar {
     width: 6px !important;
     border-radius: 360px;
 }
 
-.sidebar.dark-mode ul::-webkit-scrollbar-thumb {
+#sidebar.dark-mode ul::-webkit-scrollbar-thumb {
     background: #444 !important;
     border-radius: 360px;
 }
 
-.sidebar.dark-mode ul::-webkit-scrollbar-track {
+#sidebar.dark-mode ul::-webkit-scrollbar-track {
     background: #222 !important;
     border-radius: 360px;
 }
 
-.sidebar li {
+#sidebar li {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -135,25 +141,25 @@ h3 {
     border: 1px solid transparent;
 }
 
-.sidebar li.light-mode {
+#sidebar li.light-mode {
     background-color: #fff;
     color: #111;
 }
 
-.sidebar li.dark-mode {
+#sidebar li.dark-mode {
     background-color: #181818;
     color: #DBDBDB;
 }
 
-.sidebar li:hover {
+#sidebar li:hover {
     padding-left: 10px;
 }
 
-.sidebar li.light-mode:hover {
+#sidebar li.light-mode:hover {
     border-color: #d5d5d5;
 }
 
-.sidebar li.dark-mode:hover {
+#sidebar li.dark-mode:hover {
     border-color: #555;
 }
 
@@ -239,6 +245,13 @@ h3 {
     color: #DBDBDB;
 }
 
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
 #note-body {
     width: 100%;
     margin-bottom: 20px;
@@ -258,10 +271,10 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px 7px;
+    padding: 5px;
     border: 0;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 360px;
 }
 
 .note-actions button.light-mode {
@@ -282,16 +295,47 @@ h3 {
     background-color: #383838;
 }
 
+#menu {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border: 0;
+    cursor: pointer;
+    border-radius: 360px;
+    position: absolute;
+    top: 15px;
+    right: 60px;
+}
+
+#menu.light-mode {
+    color: #555;
+    background-color: #fff;
+}
+
+#menu.dark-mode {
+    color: #999;
+    background-color: transparent;
+}
+
+#menu.light-mode:hover {
+    background-color: #ebebeb;
+}
+
+#menu.dark-mode:hover {
+    background-color: #383838;
+}
+
 #dark-mode {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px 7px;
+    padding: 5px;
     border: 0;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 360px;
     position: absolute;
-    top: 30px;
+    top: 15px;
     right: 20px;
 }
 
@@ -354,6 +398,7 @@ h3 {
     justify-content: center;
     align-items: center;
     visibility: hidden;
+    z-index: 9999999;
 }
 
 .popup-content {
@@ -428,7 +473,6 @@ h3 {
     align-items: center;
     justify-content: center;
     font-family: "Roboto", sans-serif;
-    font-weight: 700;
     font-size: 17px;
     cursor: pointer;
     background-color: #2D6AFF;
@@ -515,4 +559,42 @@ h3 {
 /* suppress IE >= 10 native functionality that can show password */
 input[type="password"]::-ms-reveal {
     display: none;
+}
+
+@media screen and (max-width: 1300px) {
+    #sidebar {
+        display: none;
+        position: relative;
+        left: -250px;
+        padding-top: 25px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        top: auto;
+        bottom: auto;
+        transition: all 300ms linear;
+        box-shadow: 3px 0px 10px -1px rgba(0,0,0,0.16);
+        z-index: 999;
+    }
+
+    #menu {
+        display: flex;
+    }
+
+    .title {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .content {
+        width: 100%;
+        padding: 18px;
+    }
+
+    #note-details {
+        width: 100%;
+        }
+
+    #note-details input {
+    font-size: 18px;
+    }
 }

@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const home = document.getElementById("home");
             const colorPicker = document.getElementById("color-picker");
             const toggleDark = document.getElementById("dark-mode");
+            const menu = document.getElementById("menu");
 
             const db = firebase.firestore();
             let notes = [];
@@ -51,6 +52,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
             barreira.style.display = 'flex'
 
+            menu.addEventListener('click', toggleSidebar);
+
             toggleDark.addEventListener("click", () => {
                 if (document.body.classList.contains('light-mode')) {
                     applyDarkMode();
@@ -66,13 +69,13 @@ document.addEventListener("DOMContentLoaded", function() {
             });
 
             function applyDarkMode() {
-                const items = document.querySelectorAll('.sidebar ul li');
+                const items = document.querySelectorAll('#sidebar ul li');
                 const usuario = document.getElementById('user');
                 const botoes = document.querySelectorAll('.note-actions button');
                 const help = document.querySelectorAll('.help');
                 const botaoDark = document.getElementById('dark-mode');
                 const h3 = document.getElementById('h3');
-                const sidebar = document.querySelector('.sidebar');
+                const sidebar = document.getElementById('sidebar');
                 
                 document.body.classList.remove('light-mode');
                 document.body.classList.add('dark-mode');
@@ -84,6 +87,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 usuario.classList.add('dark-mode');
                 botaoDark.classList.remove('light-mode');
                 botaoDark.classList.add('dark-mode');
+                menu.classList.remove('light-mode');
+                menu.classList.add('dark-mode');
                 h3.style.color = "#DBDBDB";
                 items.forEach(item => {
                     item.classList.remove('light-mode');
@@ -100,13 +105,13 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             function applyLightMode() {
-                const items = document.querySelectorAll('.sidebar ul li');
+                const items = document.querySelectorAll('#sidebar ul li');
                 const usuario = document.getElementById('user');
                 const botoes = document.querySelectorAll('.note-actions button');
                 const help = document.querySelectorAll('.help');
                 const botaoDark = document.getElementById('dark-mode');
                 const h3 = document.getElementById('h3');
-                const sidebar = document.querySelector('.sidebar');
+                const sidebar = document.getElementById('sidebar');
                 
                 document.body.classList.remove('dark-mode');
                 document.body.classList.add('light-mode');
@@ -118,6 +123,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 usuario.classList.add('light-mode');
                 botaoDark.classList.remove('dark-mode');
                 botaoDark.classList.add('light-mode');
+                menu.classList.remove('dark-mode');
+                menu.classList.add('light-mode');
                 h3.style.color = "#111";
                 items.forEach(item => {
                     item.classList.remove('dark-mode');
@@ -147,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                     notesList.appendChild(li);
                 });
-                const items = document.querySelectorAll('.sidebar ul li');
+                const items = document.querySelectorAll('#sidebar ul li');
                 if (document.body.classList.contains('light-mode')) {
                     items.forEach(item => {
                         item.classList.add('light-mode');
@@ -294,6 +301,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 }
             });
+
+            function toggleSidebar(){
+                document.getElementById("sidebar").classList.toggle('active');
+            }
 
             document.getElementById("logout").addEventListener("click", () => {
                 firebase.auth().signOut().then(() => {
