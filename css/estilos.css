@@ -304,8 +304,8 @@ h3 {
     cursor: pointer;
     border-radius: 360px;
     position: absolute;
-    top: 15px;
-    right: 60px;
+    top: 5px;
+    right: 30px;
 }
 
 #menu.light-mode {
@@ -335,8 +335,8 @@ h3 {
     cursor: pointer;
     border-radius: 360px;
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 5px;
+    right: 5px;
 }
 
 #dark-mode.light-mode {
