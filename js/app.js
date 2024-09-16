@@ -251,7 +251,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         noteDetails.classList.add("hidden");
                         home.classList.remove("hidden");
                         renderNotesList();
-                        getNumberOfNotes();
                     })
                     .catch((error) => console.error("Erro ao deletar nota: ", error));
             });
