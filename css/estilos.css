@@ -321,8 +321,8 @@ h3 {
     cursor: pointer;
     border-radius: 360px;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 15px;
+    right: 50px;
 }
 
 #menu.light-mode {
