@@ -54,11 +54,28 @@ h3 {
     bottom: 20px;
     left: 20px;
     transition: all 300ms linear;
+    z-index: 999999 !important;
 }
 
 #sidebar.active {
     display: flex;
     left: 0px;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    visibility: hidden;
+    z-index: 999;
+    cursor: pointer;
+}
+
+#overlay.active {
+    visibility: visible;
 }
 
 .logo {
@@ -304,8 +321,8 @@ h3 {
     cursor: pointer;
     border-radius: 360px;
     position: absolute;
-    top: 5px;
-    right: 38px;
+    top: 15px;
+    right: 60px;
 }
 
 #menu.light-mode {
@@ -335,8 +352,8 @@ h3 {
     cursor: pointer;
     border-radius: 360px;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 15px;
+    right: 20px;
 }
 
 #dark-mode.light-mode {
@@ -563,17 +580,27 @@ input[type="password"]::-ms-reveal {
 
 @media screen and (max-width: 1300px) {
     #sidebar {
-        display: none;
-        position: relative;
         left: -250px;
         padding-top: 25px;
         padding-bottom: 20px;
         padding-left: 20px;
-        top: auto;
-        bottom: auto;
+        top: 0;
+        bottom: 0;
         transition: all 300ms linear;
         box-shadow: 3px 0px 10px -1px rgba(0,0,0,0.16);
         z-index: 999;
+    }
+
+    #sidebar.light-mode {
+        background-color: #fff;
+    }
+
+    #sidebar.dark-mode {
+        background-color: #181818;
+    }
+
+    #sidebar ul {
+        overflow-y: auto;
     }
 
     #menu {

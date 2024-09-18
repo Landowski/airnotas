@@ -7,6 +7,7 @@ var firebaseConfig = {
     messagingSenderId: "607854523953",
     appId: "1:607854523953:web:643c16a8ed7a143b144710"
 };
+
 firebase.initializeApp(firebaseConfig);
 
 // CARREGA OS EVENTOS SE USER ESTIVER LOGADO
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const colorPicker = document.getElementById("color-picker");
             const toggleDark = document.getElementById("dark-mode");
             const menu = document.getElementById("menu");
+            const overlay = document.getElementById("overlay");
 
             const db = firebase.firestore();
             let notes = [];
@@ -53,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
             barreira.style.display = 'flex'
 
             menu.addEventListener('click', toggleSidebar);
+            overlay.addEventListener('click', toggleSidebar);
 
             toggleDark.addEventListener("click", () => {
                 if (document.body.classList.contains('light-mode')) {
@@ -303,6 +306,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             function toggleSidebar(){
                 document.getElementById("sidebar").classList.toggle('active');
+                document.getElementById("overlay").classList.toggle('active');
             }
 
             document.getElementById("logout").addEventListener("click", () => {
