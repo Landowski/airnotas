@@ -352,8 +352,8 @@ h3 {
     cursor: pointer;
     border-radius: 360px;
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 5px;
+    right: 5px;
 }
 
 #dark-mode.light-mode {
@@ -603,6 +603,11 @@ input[type="password"]::-ms-reveal {
         overflow-y: auto;
     }
 
+    #dark-mode {
+    top: 15px;
+    right: 20px;
+    }
+    
     #menu {
         display: flex;
     }
