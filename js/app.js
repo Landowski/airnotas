@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const unpinnedNotes = notes.filter(note => !note.pinned).sort((a, b) => (a.title || "").localeCompare(b.title || ""));
                 [...pinnedNotes, ...unpinnedNotes].forEach(note => {
                     const li = document.createElement("li");
-                    li.innerHTML = (note.pinned ? "<i class='las la-thumbtack' style='font-size: 20px;'></i>" : "") + (note.title || "Nova página");
+                    li.innerHTML = (note.pinned ? "<i class='las la-thumbtack' style='font-size: 20px; color: #F44336;'></i>" : "") + (note.title || "Nova página");
                     li.dataset.id = note.id;
                     li.addEventListener("click", () => selectNote(note.id));
                     if (note.id === currentNoteId) {
