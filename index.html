@@ -23,6 +23,11 @@
 
     gtag('config', 'G-LXQE3PX95G');
     </script>
+    <script>
+        if (typeof navigator.serviceWorker !== 'undefined') {
+            navigator.serviceWorker.register('sw.js')
+        }
+    </script>
 </head>
 <body>
     <div class="container">
