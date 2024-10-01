@@ -19,6 +19,7 @@
             navigator.serviceWorker.register('sw.js')
         }
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
 <body class="light-mode">
     <div class="container" id="container">
@@ -49,15 +50,11 @@
                 <div id="note-body" contenteditable="true" placeholder="Digite sua mensagem"></div>
             </div>
             <div id="home">
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <h3 id="h3">Atalhos:</h3>
-                    <div class="help light-mode"><b>Negrito</b> = Control + B</div>
-                    <div class="help light-mode"><i>Itálico</i> = Control + I</div>
-                    <div class="help light-mode"><u>Sublinhado</u> = Control + U</div>
-                    <div class="help light-mode"><h3 style="margin: 0">Título</h3> = Control + H</div>
-                    <div class="help light-mode">● Lista = Control + L</div>
-                    <div class="help light-mode"><span style="color: #2D6AFF">Cor</span> = Control + P</div>
+                <div class="insertToDo">
+                    <h3 id="h3">Para fazer:</h3>
+                    <input type="text" id="input-to-do" placeholder="Insira a tarefa">
                 </div>
+                <div id="to-do"></div>
             </div>
     </div>
     <div id="delete-confirmation" class="popup hidden">

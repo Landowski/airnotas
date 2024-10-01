@@ -35,7 +35,9 @@ document.addEventListener("DOMContentLoaded", function() {
             const toggleDark = document.getElementById("dark-mode");
             const menu = document.getElementById("menu");
             const overlay = document.getElementById("overlay");
-
+            const todoInput = document.getElementById("input-to-do");
+            const todoList = document.getElementById("to-do");
+            
             const db = firebase.firestore();
             let notes = [];
             let currentNoteId = null;
@@ -54,6 +56,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
             barreira.style.display = 'flex'
 
+            todoInput.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    const todoText = todoInput.value.trim();
+                    if (todoText !== "") {
+                        addTodo(todoText);
+                        todoInput.value = "";
+                    }
+                }
+            });
+
             menu.addEventListener('click', toggleSidebar);
             overlay.addEventListener('click', toggleSidebar);
 
@@ -71,17 +84,110 @@ document.addEventListener("DOMContentLoaded", function() {
                 location.reload();
             });
 
+            loadTodos();
+
+            function addTodo(text) {
+                db.collection("to-do")
+                    .where("userId", "==", userId)
+                    .orderBy("ordem", "desc")
+                    .limit(1)
+                    .get()
+                    .then((querySnapshot) => {
+                        let newOrder = 0;
+                        if (!querySnapshot.empty) {
+                            const lastTodo = querySnapshot.docs[0].data();
+                            newOrder = lastTodo.ordem + 1;
+                        }
+            
+                        db.collection("to-do").add({
+                            userId: userId,
+                            item: text,
+                            ordem: newOrder
+                        })
+                        .then(() => {
+                            loadTodos();
+                        });
+                    });
+            }            
+
+            function loadTodos() {
+                todoList.innerHTML = "";
+                db.collection("to-do")
+                    .where("userId", "==", userId)
+                    .orderBy("ordem")
+                    .get()
+                    .then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            const todoItem = doc.data();
+                            const todoElement = document.createElement("div");
+                            todoElement.className = "to-do " + (document.body.classList.contains("light-mode") ? "light-mode" : "dark-mode");
+                            todoElement.dataset.id = doc.id;
+                            todoElement.innerHTML = `
+                                <i class="las la-grip-lines dragIcon"></i>
+                                <span style="width: 100%;">${todoItem.item}</span>
+                                <i class="las la-check-circle deleteToDo" style="font-size: 20px;" data-id="${doc.id}"></i>
+                            `;
+                            todoList.appendChild(todoElement);
+            
+                            todoElement.querySelector(".deleteToDo").addEventListener("click", function() {
+                                const todoId = this.getAttribute("data-id");
+                                deleteTodo(todoId);
+                            });
+                        });
+            
+                        new Sortable(todoList, {
+                            handle: '.dragIcon',
+                            animation: 150,
+                            onStart: function(evt) {
+                                const todos = todoList.querySelectorAll('.to-do');
+                                todos.forEach((todo, index) => {
+                                    if (index !== evt.oldIndex) { // Se não for o item arrastado
+                                        todo.classList.add('faded');
+                                    }
+                                });
+                            },
+                            onEnd: function(evt) {
+                                const todos = todoList.querySelectorAll('.to-do');
+                                todos.forEach((todo) => {
+                                    todo.classList.remove('faded'); // Remove a opacidade de todos
+                                });
+                                updateTodoOrder(); // Atualiza a ordem no Firestore
+                            }
+                        });
+                        
+                    });
+            }
+
+            function updateTodoOrder() {
+                const todos = todoList.querySelectorAll('.to-do');
+                todos.forEach((todoElement, index) => {
+                    const todoId = todoElement.dataset.id;
+                    db.collection("to-do").doc(todoId).update({
+                        ordem: index
+                    });
+                });
+            }          
+
+            function deleteTodo(todoId) {
+                db.collection("to-do").doc(todoId).delete().then(() => {
+                    loadTodos();
+                });
+            }
+
             function applyDarkMode() {
                 const items = document.querySelectorAll('#sidebar ul li');
                 const usuario = document.getElementById('user');
                 const botoes = document.querySelectorAll('.note-actions button');
-                const help = document.querySelectorAll('.help');
+                const toDoText = document.querySelectorAll('.to-do');
                 const botaoDark = document.getElementById('dark-mode');
                 const h3 = document.getElementById('h3');
                 const sidebar = document.getElementById('sidebar');
+                const insertToDo = document.querySelector(".insertToDo");
                 
                 document.body.classList.remove('light-mode');
                 document.body.classList.add('dark-mode');
+                insertToDo.classList.remove('light-mode');
+                insertToDo.classList.add('dark-mode');
                 sidebar.classList.remove('light-mode');
                 sidebar.classList.add('dark-mode');
                 noteDetails.classList.remove('light-mode');
@@ -101,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     item.classList.remove('light-mode');
                     item.classList.add('dark-mode');
                 });
-                help.forEach(item => {
+                toDoText.forEach(item => {
                     item.classList.remove('light-mode');
                     item.classList.add('dark-mode');
                 });
@@ -111,13 +217,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 const items = document.querySelectorAll('#sidebar ul li');
                 const usuario = document.getElementById('user');
                 const botoes = document.querySelectorAll('.note-actions button');
-                const help = document.querySelectorAll('.help');
+                const toDoText = document.querySelectorAll('.to-do');
                 const botaoDark = document.getElementById('dark-mode');
                 const h3 = document.getElementById('h3');
                 const sidebar = document.getElementById('sidebar');
+                const insertToDo = document.querySelector(".insertToDo");
                 
                 document.body.classList.remove('dark-mode');
                 document.body.classList.add('light-mode');
+                insertToDo.classList.remove('dark-mode');
+                insertToDo.classList.add('light-mode');
                 sidebar.classList.remove('dark-mode');
                 sidebar.classList.add('light-mode');
                 noteDetails.classList.remove('dark-mode');
@@ -137,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     item.classList.remove('dark-mode');
                     item.classList.add('light-mode');
                 });
-                help.forEach(item => {
+                toDoText.forEach(item => {
                     item.classList.remove('dark-mode');
                     item.classList.add('light-mode');
                 });
@@ -194,7 +303,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (note.id) {
                     db.collection("notes").doc(note.id).set(note)
                         .then(() => renderNotesList())
-                        .catch((error) => console.error("Erro ao salvar nota: ", error));
                 }
             }
 
@@ -255,7 +363,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         home.classList.remove("hidden");
                         renderNotesList();
                     })
-                    .catch((error) => console.error("Erro ao deletar nota: ", error));
             });
 
             cancelDeleteButton.addEventListener("click", () => {
@@ -312,9 +419,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("logout").addEventListener("click", () => {
                 firebase.auth().signOut().then(() => {
                     window.location.href = "login.html";
-                }).catch((error) => {
-                    console.error("Erro ao sair: ", error);
-                });
+                })
             });
         }
     });
