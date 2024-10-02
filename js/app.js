@@ -185,6 +185,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 const h3 = document.getElementById('h3');
                 const sidebar = document.getElementById('sidebar');
                 const insertToDo = document.querySelector(".insertToDo");
+                const comandos = document.getElementById('comandos');
+                const comandosHeader = document.querySelector('.comandos-header');
                 
                 document.body.classList.remove('light-mode');
                 document.body.classList.add('dark-mode');
@@ -196,6 +198,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 noteDetails.classList.add('dark-mode');
                 usuario.classList.remove('light-mode');
                 usuario.classList.add('dark-mode');
+                comandos.classList.remove('light-mode');
+                comandos.classList.add('dark-mode');
+                comandosHeader.classList.remove('light-mode');
+                comandosHeader.classList.add('dark-mode');
                 botaoDark.classList.remove('light-mode');
                 botaoDark.classList.add('dark-mode');
                 menu.classList.remove('light-mode');
@@ -224,6 +230,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 const h3 = document.getElementById('h3');
                 const sidebar = document.getElementById('sidebar');
                 const insertToDo = document.querySelector(".insertToDo");
+                const comandos = document.getElementById('comandos');
+                const comandosHeader = document.querySelector('.comandos-header');
                 
                 document.body.classList.remove('dark-mode');
                 document.body.classList.add('light-mode');
@@ -235,6 +243,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 noteDetails.classList.add('light-mode');
                 usuario.classList.remove('dark-mode');
                 usuario.classList.add('light-mode');
+                comandos.classList.remove('dark-mode');
+                comandos.classList.add('light-mode');
+                comandosHeader.classList.remove('dark-mode');
+                comandosHeader.classList.add('light-mode');
                 botaoDark.classList.remove('dark-mode');
                 botaoDark.classList.add('light-mode');
                 menu.classList.remove('dark-mode');
@@ -459,7 +471,8 @@ document.addEventListener("DOMContentLoaded", function() {
             });
 
             document.addEventListener("keydown", (event) => {
-                if (event.ctrlKey) {
+                // Verifica se o elemento ativo é o noteBody
+                if (event.ctrlKey && document.activeElement === noteBody) {
                     switch (event.key) {
                         case 'p':
                             event.preventDefault();
@@ -482,9 +495,9 @@ document.addEventListener("DOMContentLoaded", function() {
                             toggleImage();
                             break;
                         case 'e':
-                        event.preventDefault();
-                        toggleRemoveFormat();
-                        break;
+                            event.preventDefault();
+                            toggleRemoveFormat();
+                            break;
                     }
                 }
             });

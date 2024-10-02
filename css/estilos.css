@@ -243,12 +243,39 @@ h3 {
     bottom: 50px;
     left: 20px;
     border-radius: 4px;
-    background-color: #f8f8f8;
-    border: 1px solid #d5d5d5;
     z-index: 9999999;
     line-height: 1.7;
     font-size: 14px;
     overflow: hidden;
+}
+
+#comandos.light-mode {
+    background-color: #f8f8f8;
+    border: 1px solid #d5d5d5;
+}
+
+#comandos.dark-mode {
+    background-color: #333;
+    color: #999;
+}
+
+.comandos-header {
+    width: 100%;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 5px;
+    padding: 5px 8px;
+    line-height: 1; 
+}
+
+.comandos-header.light-mode {
+    background-color: #e9e9e9;
+    color: #666;
+}
+
+.comandos-header.dark-mode {
+    background-color: #222;
+    color: #666;
 }
 
 .content {
