@@ -229,8 +229,26 @@ h3 {
     cursor: default;
 }
 
+.la-question-circle:hover {
+    color: #2D6AFF;
+}
+
 .la-power-off:hover {
     color: red;
+}
+
+#comandos {
+    width: 200px;
+    position: absolute;
+    bottom: 50px;
+    left: 20px;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    border: 1px solid #d5d5d5;
+    z-index: 9999999;
+    line-height: 1.7;
+    font-size: 14px;
+    overflow: hidden;
 }
 
 .content {
@@ -265,6 +283,10 @@ h3 {
     color: #DBDBDB;
 }
 
+.hidden {
+    display: none;
+}
+
 .title {
     display: flex;
     justify-content: space-between;
@@ -279,6 +301,15 @@ h3 {
     border: 0;
     outline: 0;
     line-height: 1.4;
+}
+
+#note-body p {
+    margin: 0 !important;
+}
+
+#note-body img {
+    max-width: 100%;
+    height: auto;
 }
 
 .note-actions {

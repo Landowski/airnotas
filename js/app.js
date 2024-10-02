@@ -43,9 +43,8 @@ document.addEventListener("DOMContentLoaded", function() {
             let currentNoteId = null;
 
             const usuario = document.getElementById("usuario")
-            const userDiv = document.getElementById("user")
             usuario.innerText = user.email
-            userDiv.title = user.email
+            usuario.title = user.email
 
             const storedMode = localStorage.getItem('theme');
             if (storedMode === 'dark-mode') {
@@ -69,6 +68,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             menu.addEventListener('click', toggleSidebar);
             overlay.addEventListener('click', toggleSidebar);
+            document.getElementById('help').addEventListener('click', function() {
+                document.getElementById('comandos').classList.toggle('hidden');
+            });
 
             toggleDark.addEventListener("click", () => {
                 if (document.body.classList.contains('light-mode')) {
@@ -306,10 +308,65 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
 
+            function getSelection() {
+                return window.getSelection();
+            }
+        
+            function saveSelection() {
+                const selection = getSelection();
+                if (selection.rangeCount > 0) {
+                    return selection.getRangeAt(0);
+                }
+                return null;
+            }
+        
+            function restoreSelection(range) {
+                if (range) {
+                    const selection = getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                }
+            }
+
+            function toggleLink() {
+                const range = saveSelection();
+                const url = prompt('Insira o link', 'https://');
+                if (url) {
+                    noteBody.focus();
+                    restoreSelection(range);
+                    
+                    document.execCommand('createLink', false, url);
+                    
+                    const selection = window.getSelection();
+                    if (selection.rangeCount > 0) {
+                        const linkElement = selection.anchorNode.parentElement;
+                        if (linkElement.tagName === 'A') {
+                            linkElement.setAttribute('contenteditable', 'false');
+                            linkElement.setAttribute('target', '_blank');
+                        }
+                    }
+                }
+            }
+            
+            function toggleImage() {
+                const range = saveSelection();
+                const url = prompt('Insira o link da imagem');
+                if (url) {
+                    noteBody.focus();
+                    restoreSelection(range);
+                    document.execCommand('insertImage', false, url);
+                }
+            }
+
             function toggleHeading() {
                 const selection = window.getSelection();
-                const selectedNode = selection.anchorNode.parentNode;
-                if (selectedNode.tagName === "h3") {
+                let selectedNode = selection.anchorNode;
+                
+                while (selectedNode && selectedNode.nodeName !== 'H3' && selectedNode.nodeName !== 'BODY') {
+                    selectedNode = selectedNode.parentNode;
+                }
+                
+                if (selectedNode && selectedNode.nodeName === 'H3') {
                     document.execCommand('formatBlock', false, 'p');
                 } else {
                     document.execCommand('formatBlock', false, 'h3');
@@ -318,6 +375,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
             function toggleUnorderedList() {
                 document.execCommand('insertUnorderedList');
+            }
+
+            function toggleRemoveFormat() {
+                const range = saveSelection();
+                if (range) {
+                    noteBody.focus();
+                    restoreSelection(range);
+                    document.execCommand('removeFormat', false, null);
+                }
             }
 
             noteTitle.addEventListener("input", () => {
@@ -407,6 +473,18 @@ document.addEventListener("DOMContentLoaded", function() {
                             event.preventDefault();
                             toggleHeading();
                             break;
+                        case 'k':
+                            event.preventDefault();
+                            toggleLink();
+                            break;
+                        case 'm':
+                            event.preventDefault();
+                            toggleImage();
+                            break;
+                        case 'e':
+                        event.preventDefault();
+                        toggleRemoveFormat();
+                        break;
                     }
                 }
             });
