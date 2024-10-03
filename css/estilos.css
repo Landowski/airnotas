@@ -339,6 +339,10 @@ h3 {
     height: auto;
 }
 
+#note-body ul {
+    margin: 0;
+}
+
 .note-actions {
     display: flex;
     justify-content: flex-end;
