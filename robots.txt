@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /admin
-Disallow: /cgi-bin/
-Sitemap: https://airnotas.com.br/sitemap.xml
